@@ -1,0 +1,69 @@
+openapi: 3.0.1
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: Inventory API
+  version: 1.0.0
+servers:
+  - url: localhost:8080/api/v3
+tags:
+  - name: Inventory API
+    description: Manage Shop Inventory
+paths:
+  /pet:
+    put:
+      tags:
+        - Inventory API
+      summary: Get Item Stock Detail
+      operationId: getItems
+      requestBody:
+        description: list of item id
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ItemsRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemInventoryResponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+        '422':
+          description: Validation exception
+
+components:
+  schemas:
+    ItemsRequest:
+      type: object
+      properties:
+        itemIds:
+          type: array
+          items:
+            $ref: "#/components/schemas/itemId"
+    ItemInventoryResponse:
+      type: object
+      properties:
+        inventoryItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/item"
+    itemId:
+      type: string
+    item:
+      type: object
+      properties:
+        itemId:
+          type: string
+        quantity:
+          type: integer
+        importedDate:
+          type: string
+          format: date-time
+        expiryDate:
+          type: string
+          format: date-time

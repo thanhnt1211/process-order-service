@@ -1,0 +1,12 @@
+spring:
+  kafka:
+    sasl-username: "username"
+    sasl-password: "pwd"
+    bootstrap-server: "broker-address"
+    security-protocol: SASL_SSL
+    security-protocol-text: SASL_PLAINTEXT
+    sasl-mechanism: PLAIN
+    sasl-admin-username: "admin-username"
+    sasl-admin-password: "admin-pwd"
+    group-id: "groupId"
+    client-id: "consumerId"
